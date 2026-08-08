@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://12obp27mht3f"]
 
 [ext_resource type="Texture2D" uid="uid://dacdqa5doe4fu" path="res://assets/tiles/placeholder-tiles.png" id="1_50nvp"]
-[ext_resource type="PackedScene" uid="uid://wtey6e5wihhg" path="res://src/scenes/player.tscn" id="2_7racn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7racn"]
 texture = ExtResource("1_50nvp")
@@ -25,5 +24,3 @@ sources/0 = SubResource("TileSetAtlasSource_7racn")
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1422515622]
 tile_map_data = PackedByteArray("AAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAABAAAAAAAEAAUAAAABAAAAAAAFAAUAAAABAAAAAAAGAAUAAAAAAAEAAAAHAAUAAAAAAAEAAAAGAAMAAAABAAEAAAAGAAIAAAABAAEAAAA=")
 tile_set = SubResource("TileSet_w1iog")
-
-[node name="Player" parent="." unique_id=977286617 instance=ExtResource("2_7racn")]

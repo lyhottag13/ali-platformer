@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ali Platformer"
-run/main_scene="uid://12obp27mht3f"
+run/main_scene="uid://cef0y0u55wmb0"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
