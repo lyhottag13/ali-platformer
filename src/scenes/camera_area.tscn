@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dputjmki8drhv"]
+
+[ext_resource type="Script" uid="uid://b021rs61s050h" path="res://src/scripts/camera_area.gd" id="1_jiqwb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7racn"]
+size = Vector2(320, 160)
+
+[node name="Area2D" type="Area2D" unique_id=1741665328]
+script = ExtResource("1_jiqwb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=65605433]
+shape = SubResource("RectangleShape2D_7racn")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=577465730]

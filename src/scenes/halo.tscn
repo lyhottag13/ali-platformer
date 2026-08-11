@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://kkllxj45o44o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sd7oc"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 12
+
+[node name="Halo" type="Panel" unique_id=1557518684]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_sd7oc")
