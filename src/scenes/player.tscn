@@ -1,35 +1,88 @@
 [gd_scene format=3 uid="uid://wtey6e5wihhg"]
 
-[ext_resource type="Texture2D" uid="uid://dh4r51p7bhid6" path="res://assets/ali/placeholder-ali.png" id="1_cusn3"]
 [ext_resource type="Script" uid="uid://dhgish1y6ta5h" path="res://src/scripts/player.gd" id="1_v4rts"]
+[ext_resource type="Texture2D" uid="uid://nqwbciprdeh1" path="res://assets/ali/tail.png" id="2_hwyk6"]
+[ext_resource type="Texture2D" uid="uid://bfq1ymoerb71e" path="res://assets/ali/ali.png" id="2_v4rts"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v4rts"]
-atlas = ExtResource("1_cusn3")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("2_v4rts")
+region = Rect2(0, 0, 22, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwyk6"]
+atlas = ExtResource("2_v4rts")
+region = Rect2(22, 0, 22, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2v1k"]
+atlas = ExtResource("2_v4rts")
+region = Rect2(44, 0, 22, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya6j6"]
+atlas = ExtResource("2_v4rts")
+region = Rect2(66, 0, 22, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qy4j"]
+atlas = ExtResource("2_v4rts")
+region = Rect2(110, 0, 22, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v6aa"]
+atlas = ExtResource("2_v4rts")
+region = Rect2(88, 0, 22, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hwyk6"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_v4rts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwyk6")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_l2v1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ya6j6")
 }],
 "loop": true,
 "name": &"idling",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qy4j")
+}],
+"loop": true,
+"name": &"jump_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8v6aa")
+}],
+"loop": true,
+"name": &"jump_up",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2v1k"]
-size = Vector2(17, 20)
+size = Vector2(15, 20)
 
 [node name="Player" type="CharacterBody2D" unique_id=977286617]
 collision_layer = 3
 script = ExtResource("1_v4rts")
 
+[node name="TailSprite" type="Sprite2D" parent="." unique_id=1557898110]
+position = Vector2(-1, -9)
+texture = ExtResource("2_hwyk6")
+centered = false
+offset = Vector2(-11, 4)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=261762523]
-position = Vector2(0, -16)
+position = Vector2(0, -10.5)
 sprite_frames = SubResource("SpriteFrames_hwyk6")
-animation = &"idling"
+animation = &"jump_up"
+autoplay = "idling"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1190341748]
-position = Vector2(-1.5, -10)
+position = Vector2(-0.5, -10)
 shape = SubResource("RectangleShape2D_l2v1k")

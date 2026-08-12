@@ -14,10 +14,10 @@ metadata/_edit_horizontal_guides_ = [0.0]
 
 [node name="World" type="Node2D" parent="." unique_id=1856748349]
 
-[node name="Level" parent="World" unique_id=997282838 instance=ExtResource("1_wwqub")]
-
 [node name="Player" parent="World" unique_id=977286617 instance=ExtResource("3_m7syd")]
 position = Vector2(96, 175)
+
+[node name="Level" parent="World" unique_id=997282838 instance=ExtResource("1_wwqub")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=790634654]
 
