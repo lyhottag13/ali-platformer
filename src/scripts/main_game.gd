@@ -13,8 +13,14 @@ var old_mouse_position: Vector2
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var halo: Panel = $CanvasLayer/Halo
 
+func _input(event: InputEvent) -> void:
+	if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
+		
 		if event.pressed and player.is_on_floor():
 			is_charging = true
 			player.set_physics_process(false)
@@ -49,3 +55,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_level_change_camera(point: Vector2) -> void:
 	camera_2d.position = point
+
+
+func _on_level_leave() -> void:
+	player.queue_free()
+	await get_tree().create_timer(1).timeout
+	if OS.has_feature("web"):
+		JavaScriptBridge.eval("window.location.href='https://lyhottag13.github.io/shop-'")

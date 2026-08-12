@@ -8,6 +8,7 @@
 
 [node name="MainGame" type="Node" unique_id=790785041]
 script = ExtResource("1_r3nyt")
+metadata/_edit_horizontal_guides_ = [0.0]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1597160249]
 
@@ -16,7 +17,7 @@ script = ExtResource("1_r3nyt")
 [node name="Level" parent="World" unique_id=997282838 instance=ExtResource("1_wwqub")]
 
 [node name="Player" parent="World" unique_id=977286617 instance=ExtResource("3_m7syd")]
-position = Vector2(113, 118)
+position = Vector2(96, 175)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=790634654]
 
@@ -35,3 +36,4 @@ texture = ExtResource("4_m7syd")
 visible = false
 
 [connection signal="change_camera" from="World/Level" to="." method="_on_level_change_camera"]
+[connection signal="leave" from="World/Level" to="." method="_on_level_leave"]
