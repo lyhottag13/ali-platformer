@@ -13,6 +13,9 @@ var old_mouse_position: Vector2
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var halo: Panel = $CanvasLayer/Halo
 
+@onready var level: Level = $World/Level
+
+
 func _input(event: InputEvent) -> void:
 	if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -51,7 +54,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			player.set_physics_process(true)
 			is_charging = false
 	elif event.is_action_pressed("skip"):
-		player.position = Vector2(200, -1850)
+		if event is InputEventKey:
+			match event.keycode:
+				KEY_Z:
+					player.position = level.get_cheat_position("forest")
+				KEY_X:
+					player.position = level.get_cheat_position("mountains")
+				KEY_C:
+					player.position = level.get_cheat_position("castle")
+				KEY_V:
+					player.position = level.get_cheat_position("summit")
+				KEY_B:
+					player.position = level.get_cheat_position("cabin")
+
 
 func _on_level_change_camera(point: Vector2) -> void:
 	camera_2d.position = point
