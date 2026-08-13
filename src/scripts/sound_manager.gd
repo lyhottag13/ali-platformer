@@ -7,10 +7,11 @@ var _audio_stream_players: Array[AudioStreamPlayer] = []
 
 const _BACKGROUNDS: Dictionary[String, AudioStream] = {
 	man = preload("uid://bj6m283i46yir"),
-	celeste_start = preload("uid://cr2fk6bar7hgh")
+	celeste_start = preload("uid://cr2fk6bar7hgh"),
 }
 
 const _SOUNDS: Dictionary[String, AudioStream] = {
+	jump = preload("uid://cf2tml7gdyii5"),
 }
 
 func play_background(sound_name: String):
@@ -64,7 +65,7 @@ func _real_play_sfx(stream: AudioStream) -> void:
 
 
 func play_sfx(sfx_name: StringName):
-	var sound_to_play: AudioStream
+	var sound_to_play: AudioStreamOggVorbis = _SOUNDS[sfx_name]
 	
 	if sound_to_play == null:
 		print("No SFX to play! Insert it into the play_sfx() method.")

@@ -39,6 +39,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			halo.size = Vector2(MAX_STRENGTH * 2, MAX_STRENGTH * 2)
 			halo.position = old_mouse_position - halo.size / 2
 		elif not event.pressed and player.is_on_floor() and is_charging:
+			SoundManager.play_sfx("jump")
 			crosshair.hide()
 			halo.hide()
 			red_tween.kill()
