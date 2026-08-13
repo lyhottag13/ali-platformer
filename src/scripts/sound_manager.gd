@@ -7,6 +7,7 @@ var _audio_stream_players: Array[AudioStreamPlayer] = []
 
 const _BACKGROUNDS: Dictionary[String, AudioStream] = {
 	man = preload("uid://bj6m283i46yir"),
+	celeste_start = preload("uid://cr2fk6bar7hgh")
 }
 
 const _SOUNDS: Dictionary[String, AudioStream] = {
