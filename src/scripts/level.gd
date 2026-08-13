@@ -9,7 +9,7 @@ const CAMERA_AREA = preload("uid://dputjmki8drhv")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	const MAX_HEIGHT := 2100.0
+	const MAX_HEIGHT := 3100.0
 	
 	for i in range(ceili(MAX_HEIGHT / 180)):
 		var new_camera_area: Area2D = CAMERA_AREA.instantiate()
