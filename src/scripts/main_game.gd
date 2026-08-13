@@ -2,7 +2,7 @@ extends Node
 
 @onready var player: CharacterBody2D = $World/Player
 
-const MAX_STRENGTH := 100
+const MAX_STRENGTH := 80
 const STRENGTH_MULTIPLIER := 6
 
 var red_tween: Tween
