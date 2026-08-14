@@ -35,5 +35,7 @@ texture = ExtResource("4_m7syd")
 [node name="Halo" parent="CanvasLayer" unique_id=1557518684 instance=ExtResource("5_c5f53")]
 visible = false
 
+[connection signal="charging_started" from="World/Player" to="." method="_on_player_charging_started"]
+[connection signal="charging_stopped" from="World/Player" to="." method="_on_player_charging_stopped"]
 [connection signal="change_camera" from="World/Level" to="." method="_on_level_change_camera"]
 [connection signal="leave" from="World/Level" to="." method="_on_level_leave"]
