@@ -2,13 +2,20 @@
 
 [ext_resource type="Script" uid="uid://cygdps4d3mg3j" path="res://src/scripts/sound_manager.gd" id="1_06ho3"]
 
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_06ho3"]
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_1wmde"]
+
 [node name="SoundManager" type="Node" unique_id=1197042462]
 script = ExtResource("1_06ho3")
 
 [node name="BackgroundSound" type="AudioStreamPlayer" parent="." unique_id=1769290224]
 unique_name_in_owner = true
+stream = SubResource("AudioStreamPolyphonic_06ho3")
 
-[node name="SFXContainer" type="Node" parent="." unique_id=1574921779]
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=1449835170]
 unique_name_in_owner = true
+stream = SubResource("AudioStreamPolyphonic_1wmde")
+autoplay = true
 
 [connection signal="finished" from="BackgroundSound" to="." method="_on_background_sound_finished" flags=18]

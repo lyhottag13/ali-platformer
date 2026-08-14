@@ -2,8 +2,9 @@ class_name AudioManager
 extends Node
 
 @onready var _background_sound: AudioStreamPlayer = %BackgroundSound
-@onready var sfx_container: Node = %SFXContainer
-var _audio_stream_players: Array[AudioStreamPlayer] = []
+
+@onready var _sfx_player: AudioStreamPlayer = %SFXPlayer
+@onready var _sfx_playback: AudioStreamPlaybackPolyphonic = _sfx_player.get_stream_playback()
 
 const _BACKGROUNDS: Dictionary[String, AudioStream] = {
 	man = preload("uid://bj6m283i46yir"),
@@ -46,29 +47,14 @@ func fade_background(start: float, end: float, duration: float = 1):
 	create_tween().tween_property(_background_sound, "volume_linear", end, duration)
 
 
-func _real_play_sfx(stream: AudioStream) -> void:
-	for sfx_player in _audio_stream_players:
-		if not sfx_player.playing:
-			sfx_player.stream = stream
-			sfx_player.play()
-			await sfx_player.finished
-			return
-	
-	# Failsafe in case there aren't enough sfx_players
-	print("Made a new SFX player!")
-	var new_sfx_player = AudioStreamPlayer.new()
-	sfx_container.add_child(new_sfx_player)
-	new_sfx_player.stream = stream
-	new_sfx_player.play()
-	await new_sfx_player.finished
-	_audio_stream_players.append(new_sfx_player)
+func _real_play_sfx(stream: AudioStreamOggVorbis) -> void:
+	_sfx_playback.play_stream(stream)
 
-
-func play_sfx(sfx_name: StringName):
+func play_sfx(sfx_name: String):
 	var sound_to_play: AudioStreamOggVorbis = _SOUNDS[sfx_name]
 	
 	if sound_to_play == null:
 		print("No SFX to play! Insert it into the play_sfx() method.")
 		return
 	
-	await _real_play_sfx(sound_to_play)
+	_real_play_sfx(sound_to_play)

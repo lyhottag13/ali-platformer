@@ -128,6 +128,4 @@ func _physics_process(delta: float) -> void:
 	elif velocity.x > 0:
 		animated_sprite_2d.flip_h = false
 	
-	print_debug(STATE.find_key(state))
-	
 	move_and_slide()
