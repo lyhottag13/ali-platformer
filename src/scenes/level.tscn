@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dc1ukggl6oy5l" path="res://assets/tiles/summit.png" id="8_hkhm5"]
 [ext_resource type="Texture2D" uid="uid://d05h803pgnlnd" path="res://assets/tiles/Wood.png" id="11_k7auq"]
 [ext_resource type="AudioStream" uid="uid://cgqf0bx1a658m" path="res://assets/sounds/summit_wind.ogg" id="13_0kndr"]
+[ext_resource type="Texture2D" uid="uid://biex6v52c1rdd" path="res://assets/misc/bench.png" id="15_ws5a7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7racn"]
 texture = ExtResource("1_50nvp")
@@ -518,6 +519,9 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_0kndr")
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3y2hn"]
+b = Vector2(48, 0)
+
 [node name="Level" type="Node2D" unique_id=997282838]
 script = ExtResource("1_7racn")
 metadata/_edit_vertical_guides_ = [0.0, 320.0]
@@ -878,6 +882,21 @@ autoplay = true
 max_distance = 855.0
 attenuation = 0.3186407
 parameters/looping = true
+
+[node name="Props" type="Node" parent="." unique_id=410064296]
+
+[node name="Bench" type="Node" parent="Props" unique_id=1270653562]
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Bench" unique_id=1152213325]
+position = Vector2(57, -2962)
+texture = ExtResource("15_ws5a7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Props/Bench" unique_id=1018558429]
+position = Vector2(30.5, -2958)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Bench/StaticBody2D" unique_id=1591273085]
+shape = SubResource("SegmentShape2D_3y2hn")
+one_way_collision = true
 
 [connection signal="body_entered" from="Door" to="." method="_on_door_body_entered"]
 [connection signal="body_entered" from="FinalArea" to="." method="_on_final_area_body_entered"]
