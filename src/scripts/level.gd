@@ -23,8 +23,6 @@ func _ready() -> void:
 		new_camera_area.body_entered.connect(_on_area_2d_body_entered, CONNECT_APPEND_SOURCE_OBJECT)
 		new_camera_area.position = Vector2(160, -184 * i + 90)
 		add_child(new_camera_area)
-	
-	SoundManager.play_background("celeste_start")
 
 
 func _on_area_2d_body_entered(_body: Node2D, area: Area2D) -> void:

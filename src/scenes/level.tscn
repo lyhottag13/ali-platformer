@@ -957,7 +957,7 @@ your mouse!
 (or finger.)"
 
 [node name="Door" type="Area2D" parent="." unique_id=1021365239]
-position = Vector2(-237, -2988)
+position = Vector2(-235, -2995)
 collision_mask = 2
 
 [node name="DoorSprite" type="Sprite2D" parent="Door" unique_id=276508427]

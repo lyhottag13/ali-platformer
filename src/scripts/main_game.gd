@@ -10,6 +10,10 @@ var old_mouse_position: Vector2
 @onready var level: Level = $World/Level
 @onready var player: Player = $World/Player
 
+func _ready() -> void:
+	SoundManager.play_background("celeste_start")
+
+
 func _input(event: InputEvent) -> void:
 	if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
