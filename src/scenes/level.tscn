@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dc1ukggl6oy5l" path="res://assets/tiles/summit.png" id="8_hkhm5"]
 [ext_resource type="Texture2D" uid="uid://csg8fns6tco2t" path="res://assets/tiles/super_wood.png" id="12_ws5a7"]
 [ext_resource type="AudioStream" uid="uid://cgqf0bx1a658m" path="res://assets/sounds/summit_wind.ogg" id="13_0kndr"]
+[ext_resource type="Texture2D" uid="uid://cx53ok6lb88q8" path="res://assets/misc/windows.png" id="15_u68jd"]
 [ext_resource type="Texture2D" uid="uid://biex6v52c1rdd" path="res://assets/misc/bench.png" id="15_ws5a7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7racn"]
@@ -793,6 +794,14 @@ fill_to = Vector2(0.8767361, 0.3142361)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_3y2hn"]
 b = Vector2(48, 0)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvmrh"]
+atlas = ExtResource("15_u68jd")
+region = Rect2(0, 0, 45.46852, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fp6li"]
+atlas = ExtResource("15_u68jd")
+region = Rect2(56.560955, 2.6276627, 41.462612, 81.31459)
+
 [node name="Level" type="Node2D" unique_id=997282838]
 script = ExtResource("1_7racn")
 metadata/_edit_vertical_guides_ = [0.0, 320.0]
@@ -866,7 +875,7 @@ texture = ExtResource("2_g67j4")
 
 [node name="ColorRect8" type="Parallax2D" parent="ColorRects" unique_id=938549089]
 z_index = -2
-scroll_offset = Vector2(50, -191)
+scroll_offset = Vector2(-270, -527)
 repeat_size = Vector2(320, 0)
 autoscroll = Vector2(10, 0)
 
@@ -879,7 +888,7 @@ texture = ExtResource("2_g67j4")
 
 [node name="ColorRect9" type="Parallax2D" parent="ColorRects" unique_id=740379558]
 z_index = -2
-scroll_offset = Vector2(100, -391)
+scroll_offset = Vector2(-220, -727)
 repeat_size = Vector2(320, 0)
 autoscroll = Vector2(10, 0)
 
@@ -892,7 +901,7 @@ texture = ExtResource("2_g67j4")
 
 [node name="ColorRect10" type="Parallax2D" parent="ColorRects" unique_id=213446823]
 z_index = -2
-scroll_offset = Vector2(150, -591)
+scroll_offset = Vector2(-170, -927)
 repeat_size = Vector2(320, 0)
 autoscroll = Vector2(10, 0)
 
@@ -957,11 +966,11 @@ texture = ExtResource("3_w1iog")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door" unique_id=517619022]
 shape = SubResource("RectangleShape2D_ikp8s")
 
-[node name="FinalArea" type="Area2D" parent="." unique_id=112280956]
+[node name="FinalAreaMusic" type="Area2D" parent="." unique_id=112280956]
 position = Vector2(15, -3367)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FinalArea" unique_id=351030142]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinalAreaMusic" unique_id=351030142]
 position = Vector2(-172, 332)
 shape = SubResource("RectangleShape2D_w1iog")
 
@@ -1030,7 +1039,7 @@ position = Vector2(132, -2106)
 [node name="CabinMarker" type="Marker2D" parent="CheatMarkers" unique_id=1087082572]
 position = Vector2(149, -3003)
 
-[node name="Area2D" parent="." unique_id=1741665328 instance=ExtResource("3_g7mpk")]
+[node name="FinalAreaCamera" parent="." unique_id=1741665328 instance=ExtResource("3_g7mpk")]
 position = Vector2(-175, -3031)
 
 [node name="Control" type="Control" parent="." unique_id=1090056984]
@@ -1174,7 +1183,33 @@ position = Vector2(30, -2966)
 shape = SubResource("SegmentShape2D_3y2hn")
 one_way_collision = true
 
+[node name="Windows" type="Node" parent="Props" unique_id=1800640082]
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Windows" unique_id=410325793]
+modulate = Color(0.38, 0.38, 0.38, 1)
+z_index = -1
+position = Vector2(83, -1637)
+texture = SubResource("AtlasTexture_cvmrh")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Props/Windows" unique_id=321421273]
+modulate = Color(0.38, 0.38, 0.38, 1)
+z_index = -1
+position = Vector2(244, -1639)
+texture = SubResource("AtlasTexture_fp6li")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Props/Windows" unique_id=2026810436]
+modulate = Color(0.38, 0.38, 0.38, 1)
+z_index = -1
+position = Vector2(83.5, -1767)
+texture = SubResource("AtlasTexture_cvmrh")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Props/Windows" unique_id=411887544]
+modulate = Color(0.38, 0.38, 0.38, 1)
+z_index = -1
+position = Vector2(244.5, -1769)
+texture = SubResource("AtlasTexture_fp6li")
+
 [connection signal="body_entered" from="Door" to="." method="_on_door_body_entered"]
-[connection signal="body_entered" from="FinalArea" to="." method="_on_final_area_body_entered"]
-[connection signal="body_exited" from="FinalArea" to="." method="_on_final_area_body_exited"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered" flags=18]
+[connection signal="body_entered" from="FinalAreaMusic" to="." method="_on_final_area_body_entered"]
+[connection signal="body_exited" from="FinalAreaMusic" to="." method="_on_final_area_body_exited"]
+[connection signal="body_entered" from="FinalAreaCamera" to="." method="_on_area_2d_body_entered" flags=18]

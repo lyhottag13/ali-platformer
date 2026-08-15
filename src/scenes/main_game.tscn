@@ -4,7 +4,20 @@
 [ext_resource type="PackedScene" uid="uid://12obp27mht3f" path="res://src/scenes/level.tscn" id="1_wwqub"]
 [ext_resource type="PackedScene" uid="uid://wtey6e5wihhg" path="res://src/scenes/player.tscn" id="3_m7syd"]
 [ext_resource type="Texture2D" uid="uid://b1vjwuiuvqyxl" path="res://assets/misc/crosshair.png" id="4_m7syd"]
+[ext_resource type="Texture2D" uid="uid://du8h486o6wbdy" path="res://assets/misc/mobile_buttons.png" id="4_wrvd8"]
 [ext_resource type="PackedScene" uid="uid://kkllxj45o44o" path="res://src/scenes/halo.tscn" id="5_c5f53"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1he1f"]
+atlas = ExtResource("4_wrvd8")
+region = Rect2(0, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xt4wc"]
+atlas = ExtResource("4_wrvd8")
+region = Rect2(60, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br2bk"]
+atlas = ExtResource("4_wrvd8")
+region = Rect2(120, 0, 60, 60)
 
 [node name="MainGame" type="Node" unique_id=790785041]
 script = ExtResource("1_r3nyt")
@@ -23,9 +36,35 @@ position = Vector2(96, 175)
 
 [node name="GUI" type="Control" parent="CanvasLayer" unique_id=1702303541]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MobileLeft" type="TouchScreenButton" parent="CanvasLayer/GUI" unique_id=804581869]
+modulate = Color(1, 1, 1, 0.31764707)
+position = Vector2(8, 118)
+texture_normal = SubResource("AtlasTexture_1he1f")
+passby_press = true
+action = "move_left"
+visibility_mode = 1
+
+[node name="MobileRight" type="TouchScreenButton" parent="CanvasLayer/GUI" unique_id=1820966516]
+modulate = Color(1, 1, 1, 0.31764707)
+position = Vector2(78, 118)
+texture_normal = SubResource("AtlasTexture_xt4wc")
+passby_press = true
+action = "move_right"
+visibility_mode = 1
+
+[node name="MobileJump" type="TouchScreenButton" parent="CanvasLayer/GUI" unique_id=790061558]
+modulate = Color(1, 1, 1, 0.31764707)
+position = Vector2(251, 117)
+texture_normal = SubResource("AtlasTexture_br2bk")
+passby_press = true
+action = "jump"
+visibility_mode = 1
 
 [node name="Crosshair" type="Sprite2D" parent="CanvasLayer" unique_id=658848404]
 unique_name_in_owner = true
