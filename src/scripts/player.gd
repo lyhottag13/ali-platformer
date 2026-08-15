@@ -50,6 +50,7 @@ var state: States = States.IDLE:
 				SoundManager.play_sfx("jump")
 				animated_sprite_2d.play("jumping")
 			States.FALLING, States.REGULAR_FALLING:
+				animated_sprite_2d.scale = Vector2.ONE
 				animated_sprite_2d.play("falling")
 			States.CHARGING:
 				red_tween = create_tween()
@@ -154,8 +155,10 @@ func _physics_process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	if velocity.x < 0:
+		animated_sprite_2d.position.x = 3
 		animated_sprite_2d.flip_h = true
 	elif velocity.x > 0:
+		animated_sprite_2d.position.x = -3
 		animated_sprite_2d.flip_h = false
 	
 	move_and_slide()
