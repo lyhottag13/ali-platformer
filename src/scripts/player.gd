@@ -6,10 +6,10 @@ signal charging_stopped
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -200.0
-const AIR_SPEED = 0
 
 const MAX_STRENGTH := 80
 const STRENGTH_MULTIPLIER := 6
+const WIND_SPEED = -5
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 #var old_mouse_position: Vector2
@@ -24,6 +24,11 @@ enum States {
 	REGULAR_JUMPING,
 	FALLING,
 	REGULAR_FALLING,
+}
+
+enum WindStates {
+	NO_WIND,
+	WIND,
 }
 
 var state: States = States.IDLE:
@@ -63,6 +68,7 @@ var state: States = States.IDLE:
 		
 		state = new_state
 
+var wind_state: WindStates = WindStates.NO_WIND
 
 var old_mouse_position: Vector2
 
@@ -79,10 +85,10 @@ func _physics_process(delta: float) -> void:
 			elif direction:
 				state = States.RUNNING
 				velocity.x = direction * SPEED
-			elif velocity.x != 0:
-				velocity.x = move_toward(velocity.x, 0, SPEED)
 			elif Input.is_action_just_pressed("real_jump"):
 				state = States.CHARGING
+			elif velocity.x != 0:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 		States.RUNNING:
 			if not is_on_floor():
@@ -154,6 +160,9 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 	
+	if wind_state == WindStates.WIND and state != States.CHARGING:
+		velocity.x += WIND_SPEED
+	
 	if velocity.x < 0:
 		animated_sprite_2d.position.x = 3
 		animated_sprite_2d.flip_h = true
@@ -162,3 +171,5 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.flip_h = false
 	
 	move_and_slide()
+func set_wind(enabled: bool):
+	wind_state = WindStates.WIND if enabled else WindStates.NO_WIND

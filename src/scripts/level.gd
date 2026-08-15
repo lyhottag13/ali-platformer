@@ -56,3 +56,11 @@ func get_cheat_position(position_name: String) -> Vector2:
 			return cabin_marker.position
 		_:
 			return forest_marker.position
+
+
+func _on_wind_area_body_entered(body: Player) -> void:
+	body.set_wind(true)
+
+
+func _on_wind_area_body_exited(body: Player) -> void:
+	body.set_wind(false)
