@@ -24,6 +24,7 @@ script = ExtResource("1_r3nyt")
 metadata/_edit_horizontal_guides_ = [0.0]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1597160249]
+unique_name_in_owner = true
 
 [node name="World" type="Node2D" parent="." unique_id=1856748349]
 
@@ -72,6 +73,7 @@ visible = false
 texture = ExtResource("4_m7syd")
 
 [node name="Halo" parent="CanvasLayer" unique_id=1557518684 instance=ExtResource("5_c5f53")]
+unique_name_in_owner = true
 visible = false
 
 [connection signal="charging_started" from="World/Player" to="." method="_on_player_charging_started"]

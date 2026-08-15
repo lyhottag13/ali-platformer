@@ -39,6 +39,8 @@ var state: States = States.IDLE:
 			States.JUMPING:
 				animated_sprite_2d.scale = Vector2(1, 1)
 			States.CHARGING:
+				SoundManager.stop_sfx()
+				
 				if red_tween.is_valid():
 					red_tween.kill()
 				
@@ -65,6 +67,7 @@ var state: States = States.IDLE:
 				old_mouse_position = get_viewport().get_mouse_position()
 				charging_started.emit(old_mouse_position)
 				animated_sprite_2d.play("charging")
+				SoundManager.play_sfx("charge")
 		
 		state = new_state
 
@@ -171,5 +174,7 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.flip_h = false
 	
 	move_and_slide()
+
+
 func set_wind(enabled: bool):
 	wind_state = WindStates.WIND if enabled else WindStates.NO_WIND

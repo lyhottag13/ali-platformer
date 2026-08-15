@@ -6,6 +6,8 @@ extends Node
 @onready var _sfx_player: AudioStreamPlayer = %SFXPlayer
 @onready var _sfx_playback: AudioStreamPlaybackPolyphonic = _sfx_player.get_stream_playback()
 
+var newest_sfx_id: int
+
 const _BACKGROUNDS: Dictionary[String, AudioStream] = {
 	man = preload("uid://bj6m283i46yir"),
 	celeste_start = preload("uid://cr2fk6bar7hgh"),
@@ -13,6 +15,7 @@ const _BACKGROUNDS: Dictionary[String, AudioStream] = {
 
 const _SOUNDS: Dictionary[String, AudioStream] = {
 	jump = preload("uid://cf2tml7gdyii5"),
+	charge = preload("uid://ceh34tgeeukyw"),
 }
 
 func play_background(sound_name: String):
@@ -48,7 +51,7 @@ func fade_background(start: float, end: float, duration: float = 1):
 
 
 func _real_play_sfx(stream: AudioStreamOggVorbis) -> void:
-	_sfx_playback.play_stream(stream)
+	newest_sfx_id = _sfx_playback.play_stream(stream)
 
 func play_sfx(sfx_name: String):
 	var sound_to_play: AudioStreamOggVorbis = _SOUNDS[sfx_name]
@@ -58,3 +61,8 @@ func play_sfx(sfx_name: String):
 		return
 	
 	_real_play_sfx(sound_to_play)
+
+
+func stop_sfx() -> void:
+	if _sfx_playback.is_stream_playing(newest_sfx_id):
+		_sfx_playback.stop_stream(newest_sfx_id)

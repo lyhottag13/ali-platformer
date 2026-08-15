@@ -4,8 +4,8 @@ var red_tween: Tween
 
 var old_mouse_position: Vector2
 @onready var crosshair: Sprite2D = %Crosshair
-@onready var camera_2d: Camera2D = $Camera2D
-@onready var halo: Panel = $CanvasLayer/Halo
+@onready var camera_2d: Camera2D = %Camera2D
+@onready var halo: Panel = %Halo
 
 @onready var level: Level = $World/Level
 @onready var player: Player = $World/Player
