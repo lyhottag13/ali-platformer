@@ -23,11 +23,11 @@ func play_background(sound_name: String):
 		
 		_background_sound.stream = _BACKGROUNDS[sound_name]
 		_background_sound.play()
-	
 
 
 func _on_background_sound_finished(source: AudioStreamPlayer) -> void:
 	source.play()
+
 
 func stop_background() -> void:
 	_background_sound.stop()
@@ -39,10 +39,6 @@ func clear_background() -> void:
 
 func has_background() -> bool:
 	return _background_sound.stream != null
-
-
-func print() -> void:
-	print(_background_sound.stream)
 
 
 func fade_background(start: float, end: float, duration: float = 1):

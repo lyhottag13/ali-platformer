@@ -22,10 +22,16 @@ const WIND_SPEED := 5
 
 @onready var snow_timer: Timer = $SnowTimer
 @onready var wind_area: Area2D = $WindArea
-@onready var snow_mask: Polygon2D = $SnowMask
+@onready var snow_particles: Array[CPUParticles2D]
+@onready var snow_particles_container: Node = $SnowParticlesContainer
+
+@onready var tutorial_text: Label = $TutorialText
 
 var wind_state: WindState
-
+const SNOW_MAX_SPEED := 300.0
+var snow_speed: float = 0
+var should_send_wind := false
+var is_wind_changing := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	const MAX_HEIGHT := 3100.0
@@ -35,8 +41,20 @@ func _ready() -> void:
 		new_camera_area.body_entered.connect(_on_area_2d_body_entered, CONNECT_APPEND_SOURCE_OBJECT)
 		new_camera_area.position = Vector2(160, -184 * i + 90)
 		add_child(new_camera_area)
+	
+	var eliminate_text = func():
+		create_tween().tween_property(tutorial_text, "modulate", Color.TRANSPARENT, 1)
+	
+	get_tree().create_timer(5).timeout.connect(eliminate_text)
+	
+	for snow_particle in snow_particles_container.get_children():
+		if snow_particle is CPUParticles2D:
+			snow_particles.append(snow_particle)
 
 
+func _process(delta: float) -> void:
+	_handle_snow(delta)
+	
 func _on_area_2d_body_entered(_body: Node2D, area: Area2D) -> void:
 	change_camera.emit(area.position)
 
@@ -72,23 +90,28 @@ func get_cheat_position(position_name: String) -> Vector2:
 
 func _on_wind_area_body_entered(body: Player) -> void:
 	body.set_wind(WIND_SPEED if wind_state == WindState.RIGHT else -WIND_SPEED)
-
+	should_send_wind = true
 
 func _on_wind_area_body_exited(body: Player) -> void:
 	body.set_wind(0)
-
+	should_send_wind = false
 
 func _on_snow_timer_timeout() -> void:
 	wind_state = WindState.LEFT if wind_state == WindState.RIGHT else WindState.RIGHT
+	is_wind_changing = true
+
+
+func _handle_snow(delta: float) -> void:
+	if is_wind_changing:
+		var lerped = lerpf(snow_speed, SNOW_MAX_SPEED if wind_state == WindState.RIGHT else -SNOW_MAX_SPEED, delta)
+		if lerped == snow_speed:
+			is_wind_changing = false
+		else:
+			snow_speed = lerped
+			if should_send_wind:
+				wind_area.get_overlapping_bodies().get(0).set_wind(snow_speed / 60.0)
 	
-	var snow_particles := snow_mask.get_children()
 	for snow_particle in snow_particles:
-		if snow_particle is CPUParticles2D:
-			snow_particle.position.x = -8 if wind_state == WindState.RIGHT else 326 
-			snow_particle.direction.x = 1 if wind_state == WindState.RIGHT else -1  
-	
-	print(wind_state)
-	var overlapping_bodies = wind_area.get_overlapping_bodies()
-	for body in overlapping_bodies:
-		if body is Player:
-			body.set_wind(WIND_SPEED if wind_state == WindState.RIGHT else -WIND_SPEED)
+		snow_particle.position.x += snow_speed * delta
+		snow_particle.position.x = -160.0 if snow_particle.position.x > 480.0 else snow_particle.position.x
+		snow_particle.position.x = 480.0 if snow_particle.position.x < -160.0 else snow_particle.position.x
