@@ -173,6 +173,8 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.position.x = -3
 		animated_sprite_2d.flip_h = false
 	
+	velocity.y = clampf(velocity.y, -INF, 700)
+	
 	move_and_slide()
 
 
