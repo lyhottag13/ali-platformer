@@ -15,6 +15,7 @@ const WIND_SPEED = -5
 #var old_mouse_position: Vector2
 
 var red_tween: Tween
+var wind_speed := 0
 
 enum States {
 	IDLE,
@@ -24,11 +25,6 @@ enum States {
 	REGULAR_JUMPING,
 	FALLING,
 	REGULAR_FALLING,
-}
-
-enum WindStates {
-	NO_WIND,
-	WIND,
 }
 
 var state: States = States.IDLE:
@@ -70,8 +66,6 @@ var state: States = States.IDLE:
 				SoundManager.play_sfx("charge")
 		
 		state = new_state
-
-var wind_state: WindStates = WindStates.NO_WIND
 
 var old_mouse_position: Vector2
 
@@ -163,8 +157,8 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	if wind_state == WindStates.WIND and state != States.CHARGING:
-		velocity.x += WIND_SPEED
+	if wind_speed != 0 and state != States.CHARGING:
+		velocity.x += wind_speed
 	
 	if velocity.x < 0:
 		animated_sprite_2d.position.x = 3
@@ -178,5 +172,5 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func set_wind(enabled: bool):
-	wind_state = WindStates.WIND if enabled else WindStates.NO_WIND
+func set_wind(speed: int):
+	wind_speed = speed

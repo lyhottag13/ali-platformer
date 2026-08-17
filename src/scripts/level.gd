@@ -4,7 +4,13 @@ extends Node2D
 signal change_camera(point: Vector2)
 signal leave
 
+enum WindState {
+	LEFT,
+	RIGHT,
+}
+
 const CAMERA_AREA = preload("uid://dputjmki8drhv")
+const WIND_SPEED := 5
 
 @onready var area_container: Node = $AreaContainer
 
@@ -13,6 +19,12 @@ const CAMERA_AREA = preload("uid://dputjmki8drhv")
 @onready var castle_marker: Marker2D = $CheatMarkers/CastleMarker
 @onready var summit_marker: Marker2D = $CheatMarkers/SummitMarker
 @onready var cabin_marker: Marker2D = $CheatMarkers/CabinMarker
+
+@onready var snow_timer: Timer = $SnowTimer
+@onready var wind_area: Area2D = $WindArea
+@onready var snow_mask: Polygon2D = $SnowMask
+
+var wind_state: WindState
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,11 +46,11 @@ func _on_door_body_entered(body: Node2D) -> void:
 	leave.emit()
 
 
-func _on_final_area_body_entered(body: Node2D) -> void:
+func _on_final_area_body_entered(_body: Node2D) -> void:
 	SoundManager.play_background("man")
 
 
-func _on_final_area_body_exited(body: Node2D) -> void:
+func _on_final_area_body_exited(_body: Node2D) -> void:
 	SoundManager.clear_background()
 
 
@@ -59,8 +71,24 @@ func get_cheat_position(position_name: String) -> Vector2:
 
 
 func _on_wind_area_body_entered(body: Player) -> void:
-	body.set_wind(true)
+	body.set_wind(WIND_SPEED if wind_state == WindState.RIGHT else -WIND_SPEED)
 
 
 func _on_wind_area_body_exited(body: Player) -> void:
-	body.set_wind(false)
+	body.set_wind(0)
+
+
+func _on_snow_timer_timeout() -> void:
+	wind_state = WindState.LEFT if wind_state == WindState.RIGHT else WindState.RIGHT
+	
+	var snow_particles := snow_mask.get_children()
+	for snow_particle in snow_particles:
+		if snow_particle is CPUParticles2D:
+			snow_particle.position.x = -8 if wind_state == WindState.RIGHT else 326 
+			snow_particle.direction.x = 1 if wind_state == WindState.RIGHT else -1  
+	
+	print(wind_state)
+	var overlapping_bodies = wind_area.get_overlapping_bodies()
+	for body in overlapping_bodies:
+		if body is Player:
+			body.set_wind(WIND_SPEED if wind_state == WindState.RIGHT else -WIND_SPEED)
