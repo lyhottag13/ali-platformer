@@ -4945,11 +4945,17 @@ debug_color = Color(0, 0.5950001, 0.7, 0)
 wait_time = 5.0
 autostart = true
 
-[node name="SnowParticlesContainer" type="Node" parent="." unique_id=779222422]
+[node name="SnowParticlesContainer" type="Node" parent="." unique_id=442802358]
 
-[node name="Snow1" type="CPUParticles2D" parent="SnowParticlesContainer" unique_id=1768928927]
+[node name="SnowParticlesForeground" type="Polygon2D" parent="SnowParticlesContainer" unique_id=60010747]
+clip_children = 1
+z_index = 1
+position = Vector2(0, -2806)
+polygon = PackedVector2Array(40, -1, 40, 6, 0, 6, 0, 778, 96, 778, 96, 798, 128, 798, 128, 822, 192, 822, 192, 790, 168, 790, 168, 782, 160, 782, 160, 778, 320, 778, 320, 0)
+
+[node name="Snow1" type="CPUParticles2D" parent="SnowParticlesContainer/SnowParticlesForeground" unique_id=1768928927]
 unique_name_in_owner = true
-position = Vector2(160, -2807)
+position = Vector2(160, 0)
 amount = 954
 lifetime = 17.3
 preprocess = 20.0
@@ -4965,43 +4971,9 @@ split_scale = true
 scale_curve_x = null
 scale_curve_y = null
 
-[node name="Snow2" type="CPUParticles2D" parent="SnowParticlesContainer" unique_id=1016815732]
+[node name="Snow4" type="CPUParticles2D" parent="SnowParticlesContainer/SnowParticlesForeground" unique_id=2107329723]
 unique_name_in_owner = true
-z_index = -1
-position = Vector2(160, -2807)
-amount = 954
-lifetime = 17.3
-preprocess = 20.0
-local_coords = true
-emission_shape = 3
-emission_rect_extents = Vector2(160, 0)
-direction = Vector2(0, 1)
-spread = 10.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 30.0
-initial_velocity_max = 30.0
-color = Color(0.48207036, 0.48761332, 0.5375, 1)
-
-[node name="Snow3" type="CPUParticles2D" parent="SnowParticlesContainer" unique_id=90747270]
-unique_name_in_owner = true
-z_index = -1
-position = Vector2(160, -2807)
-amount = 954
-lifetime = 17.3
-preprocess = 20.0
-local_coords = true
-emission_shape = 3
-emission_rect_extents = Vector2(160, 0)
-direction = Vector2(0, 1)
-spread = 10.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 20.0
-initial_velocity_max = 20.0
-color = Color(0.296875, 0.296875, 0.296875, 1)
-
-[node name="Snow4" type="CPUParticles2D" parent="SnowParticlesContainer" unique_id=2107329723]
-unique_name_in_owner = true
-position = Vector2(-160, -2807)
+position = Vector2(-160, 0)
 amount = 954
 lifetime = 17.3
 preprocess = 20.0
@@ -5014,12 +4986,17 @@ gravity = Vector2(0, 0)
 initial_velocity_min = 50.0
 initial_velocity_max = 50.0
 
-[node name="Snow5" type="CPUParticles2D" parent="SnowParticlesContainer" unique_id=1627913684]
-unique_name_in_owner = true
+[node name="SnowParticlesBackground" type="Polygon2D" parent="SnowParticlesContainer" unique_id=1313149535]
+clip_children = 1
 z_index = -1
-position = Vector2(-160, -2807)
+position = Vector2(0, -2806)
+polygon = PackedVector2Array(40, -1, 40, 6, 0, 6, 0, 778, 96, 778, 96, 798, 128, 798, 128, 822, 192, 822, 192, 790, 168, 790, 168, 782, 160, 782, 160, 778, 320, 778, 320, 0)
+
+[node name="Snow2" type="CPUParticles2D" parent="SnowParticlesContainer/SnowParticlesBackground" unique_id=1016815732]
+unique_name_in_owner = true
+position = Vector2(160, 0)
 amount = 954
-lifetime = 17.3
+lifetime = 50.0
 preprocess = 20.0
 local_coords = true
 emission_shape = 3
@@ -5029,14 +5006,13 @@ spread = 10.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 30.0
 initial_velocity_max = 30.0
-color = Color(0.48207036, 0.48761332, 0.5375, 1)
+color = Color(0.603125, 0.603125, 0.603125, 1)
 
-[node name="Snow6" type="CPUParticles2D" parent="SnowParticlesContainer" unique_id=1331853628]
+[node name="Snow3" type="CPUParticles2D" parent="SnowParticlesContainer/SnowParticlesBackground" unique_id=90747270]
 unique_name_in_owner = true
-z_index = -1
-position = Vector2(-160, -2807)
+position = Vector2(160, 0)
 amount = 954
-lifetime = 17.3
+lifetime = 50.0
 preprocess = 20.0
 local_coords = true
 emission_shape = 3
@@ -5046,7 +5022,39 @@ spread = 10.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
-color = Color(0.296875, 0.296875, 0.296875, 1)
+color = Color(0.3125, 0.3125, 0.3125, 1)
+
+[node name="Snow5" type="CPUParticles2D" parent="SnowParticlesContainer/SnowParticlesBackground" unique_id=1627913684]
+unique_name_in_owner = true
+position = Vector2(-160, 0)
+amount = 954
+lifetime = 50.0
+preprocess = 20.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(160, 0)
+direction = Vector2(0, 1)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+color = Color(0.603125, 0.603125, 0.603125, 1)
+
+[node name="Snow6" type="CPUParticles2D" parent="SnowParticlesContainer/SnowParticlesBackground" unique_id=1331853628]
+unique_name_in_owner = true
+position = Vector2(-160, 0)
+amount = 954
+lifetime = 50.0
+preprocess = 20.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(160, 0)
+direction = Vector2(0, 1)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+color = Color(0.3125, 0.3125, 0.3125, 1)
 
 [connection signal="body_entered" from="Door" to="." method="_on_door_body_entered"]
 [connection signal="body_entered" from="FinalAreaMusic" to="." method="_on_final_area_body_entered"]
